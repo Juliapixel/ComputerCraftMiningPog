@@ -80,6 +80,7 @@ function tunnelAhead(dist)
             print("cancelled.")
             return(false)
         end
+    end
     for i=1, dist, 1 do
         goForward()
         digOres()
