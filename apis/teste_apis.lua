@@ -1,5 +1,3 @@
 os.loadAPI("ComputerCraftMiningPog/apis/mine.lua")
-print("ore ahead: " .. tostring(mine.oreAhead()))
-print("ore up: " .. tostring(mine.oreUp()))
-print("ore down: " .. tostring(mine.oreDown()))
+print("mining for ores...")
 mine.digOres()

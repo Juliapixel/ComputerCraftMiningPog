@@ -1,4 +1,4 @@
-function oreAhead()
+local function oreAhead()
     local has_block, data = turtle.inspect()
     if has_block then
         if string.find(textutils.serialise(data), "forge:ores") then
@@ -11,7 +11,7 @@ function oreAhead()
     end
 end
 
-function oreUp()
+local function oreUp()
     local has_block, data = turtle.inspectUp()
     if has_block then
         if string.find(textutils.serialise(data), "forge:ores") then
@@ -24,7 +24,7 @@ function oreUp()
     end
 end
 
-function oreDown()
+local function oreDown()
     local has_block, data = turtle.inspectDown()
     if has_block then
         if string.find(textutils.serialise(data), "forge:ores") then
