@@ -1,2 +1,2 @@
-os.loadAPI(/prospect.lua)
+os.loadAPI("./prospect.lua")
 print("ore ahead: " .. prospect.oreAhead())
