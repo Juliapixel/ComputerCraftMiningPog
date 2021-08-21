@@ -51,10 +51,12 @@ function digOres()
     left = left.oreAhead()
     if left then 
         turtle.dig()
+    end
     turtle.turnRight()
     turtle.turnRight()
     right = right.oreAhead()
     if right then
         turtle.dig()
+    end
     turtle.turnLeft()
 end
