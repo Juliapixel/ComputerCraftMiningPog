@@ -1,3 +1,3 @@
-os.loadAPI("ComputerCraftMiningPog/apis/mine.lua")
+require("mine")
 print("mining for ores...")
-mine.tunnelAhead(4)
+tunnelAhead(4)
