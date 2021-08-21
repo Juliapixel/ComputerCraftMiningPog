@@ -1,4 +1,4 @@
-
+require("comparer.compare")
 local function oreAhead()
     local has_block, data = turtle.inspect()
     if has_block then
