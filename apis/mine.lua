@@ -39,8 +39,8 @@ end
 
 function digOres()
     local up, down, left, right
-    up = up.oreUp()
-    down = down.oreUp()
+    up = oreUp()
+    down = oreDown()
     if up then
         turtle.digUp()
     end
@@ -48,13 +48,13 @@ function digOres()
         turtle.digDown()
     end
     turtle.turnLeft()
-    left = left.oreAhead()
+    left = oreAhead()
     if left then 
         turtle.dig()
     end
     turtle.turnRight()
     turtle.turnRight()
-    right = right.oreAhead()
+    right = oreAhead()
     if right then
         turtle.dig()
     end
