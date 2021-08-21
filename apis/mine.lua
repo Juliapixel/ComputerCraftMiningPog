@@ -67,15 +67,16 @@ local function goForward()
     turtle.forward()
 end
 
-function tunnelAhead(dist)
+function tunnelAhead (dist)
+    dist = tonumber(dist)
     turtle.refuel()
-    local full_dist = dist*2
+    local full_dist = 2*dist
     if turtle.getFuelLevel() < 2 then
         print("no fuel! cancelling...")
         return(false)
     end
     if full_dist < turtle.getFuelLevel() then
-        dist = turtle.getFuelLevel()/2
+        dist = turtle.getFuelLevel()/4
         print(string.format("not enough fuel, will only mine for %d blocks! proceed anyway? (y/n)", dist))
         write("> ")
         local input = string.lower(read())
