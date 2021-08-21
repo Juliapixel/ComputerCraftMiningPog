@@ -36,3 +36,25 @@ function oreDown()
         return(false)
     end
 end
+
+function digOres()
+    local up, down, left, right
+    up = up.oreUp()
+    down = down.oreUp()
+    if up then
+        turtle.digUp()
+    end
+    if down then
+        turtle.digDown()
+    end
+    turtle.turnLeft()
+    left = left.oreAhead()
+    if left then 
+        turtle.dig()
+    turtle.turnRight()
+    turtle.turnRight()
+    right = right.oreAhead()
+    if right then
+        turtle.dig()
+    turtle.turnLeft()
+end
