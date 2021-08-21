@@ -69,6 +69,10 @@ end
 
 function tunnelAhead(dist)
     turtle.refuel()
+    if turtle.getFuelLevel() < 2 then
+        print("no fuel! cancelling...")
+        return(false)
+    end
     if dist*2 < turtle.getFuelLevel() then
         dist = turtle.getFuelLevel()/2
         print("not enough fuel, will only mine for %d blocks! proceed anyway? (y/n)", dist)
