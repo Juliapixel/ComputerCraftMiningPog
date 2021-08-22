@@ -3,19 +3,19 @@ local itemdb = fs.open("ComputerCraftMiningPog/apis/comparer/items_db.txt", "r")
 local blocks = {}
 local items = {}
 
-local function tabulatedb (db)
+local function tabulatedb (db, db_table)
     while true do
         local line = db.readLine()
         if not line then
             db.close()
             break end
         -- #db is the ammount of items in the table, so i am adding another item to the table every time this is called
-        db[#db + 1] = line
+        dbtable[#dbtable + 1] = line
     end
 end
 
-tabulatedb(blockdb)
-tabulatedb(itemdb)
+tabulatedb(blockdb, blocks)
+tabulatedb(itemdb, items)
 
 function debugdb()
     for i=1, #blocks, 1 do

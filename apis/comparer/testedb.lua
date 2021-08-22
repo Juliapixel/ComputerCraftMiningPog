@@ -1,2 +1,2 @@
-local comparer = require("comparer")
+local comparer = require("compare")
 comparer.debugdb()
