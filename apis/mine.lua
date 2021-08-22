@@ -69,7 +69,6 @@ end
 
 function tunnelAhead (dist)
     dist = tonumber(dist)
-    turtle.refuel()
     local full_dist = 2*dist
     if turtle.getFuelLevel() < 2 then
         print("no fuel! cancelling...")
