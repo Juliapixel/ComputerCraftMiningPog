@@ -40,6 +40,7 @@ function stackInv()
             if name == inv[j][name] then
                 turtle.select(i)
                 turtle.transferTo(j)
+            end
         end
     end
     turtle.select(1)
