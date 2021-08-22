@@ -1,14 +1,15 @@
 require("comparer.compare")
+
 local function oreAhead()
     local has_block, data = turtle.inspect()
     if has_block then
         if string.find(textutils.serialise(data), "forge:ores") then
-            return(true)
+            return true
         else
-            return(false)
+            return false
         end
     else
-        return(false)
+        return false
     end
 end
 
@@ -16,12 +17,12 @@ local function oreUp()
     local has_block, data = turtle.inspectUp()
     if has_block then
         if string.find(textutils.serialise(data), "forge:ores") then
-            return(true)
+            return true
         else
-            return(false)
+            return false
         end
     else
-        return(false)
+        return false
     end
 end
 
@@ -29,12 +30,12 @@ local function oreDown()
     local has_block, data = turtle.inspectDown()
     if has_block then
         if string.find(textutils.serialise(data), "forge:ores") then
-            return(true)
+            return true
         else
-            return(false)
+            return false
         end
     else
-        return(false)
+        return false
     end
 end
 
@@ -67,12 +68,12 @@ local function goForward()
     turtle.forward()
 end
 
-function tunnelAhead (dist)
+function tunnelAhead(dist)
     dist = tonumber(dist)
     local full_dist = 2*dist
     if turtle.getFuelLevel() < 2 then
         print("no fuel! cancelling...")
-        return(false)
+        return false
     end
     if full_dist > turtle.getFuelLevel() then
         dist = turtle.getFuelLevel()/2
@@ -83,7 +84,7 @@ function tunnelAhead (dist)
             print("proceeding!")
         else
             print("cancelled.")
-            return(false)
+            return false
         end
     end
     for i=1, dist, 1 do

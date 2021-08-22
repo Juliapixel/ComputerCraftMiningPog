@@ -1,11 +1,12 @@
-local itemdb = fs.open("ComputerCraftMiningPog/apis/comparer/items_db.txt", "r")
+local itemdb = fs.open(fs.getDir(shell.getRunningProgram()) .. "/apis/comparer/items_db.txt", "r")
 local items = {}
 
 while true do
     local line = itemdb.readLine()
     if not line then
         itemdb.close()
-        break end
+        break
+    end
     -- #items is the ammount of items in the table, so i am adding another item to the table every time this is called
     items[#items + 1] = line
 end
@@ -40,9 +41,9 @@ function stackInv()
     end
     turtle.select(1)
     if turtle.getItemCount(16) < 1 then
-        return(true)
+        return true
     else
-        return (false)
+        return false
     end
 end
 
