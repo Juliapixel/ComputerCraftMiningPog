@@ -10,7 +10,7 @@ local function tabulatedb (db, db_table)
             db.close()
             break end
         -- #db is the ammount of items in the table, so i am adding another item to the table every time this is called
-        dbtable[#dbtable + 1] = line
+        db_table[#db_table + 1] = line
     end
 end
 
