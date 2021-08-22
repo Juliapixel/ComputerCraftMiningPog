@@ -1,6 +1,4 @@
-local blockdb = fs.open("ComputerCraftMiningPog/apis/comparer/blocks_db.txt", "r")
 local itemdb = fs.open("ComputerCraftMiningPog/apis/comparer/items_db.txt", "r")
-local blocks = {}
 local items = {}
 
 local function tabulatedb (db, db_table)
@@ -14,7 +12,6 @@ local function tabulatedb (db, db_table)
     end
 end
 
-tabulatedb(blockdb, blocks)
 tabulatedb(itemdb, items)
 
 function debugdb()
