@@ -1,2 +1,9 @@
 minecraft:coal
 minecraft:diamond
+minecraft:iron_ore
+minecraft:coal_ore
+minecraft:diamond_ore
+minecraft:redstone
+minecraft:lapis_lazuli
+minecraft:gold_ingot
+minecraft:iron_ingot
