@@ -1,6 +1,5 @@
-local dir = fs.find("/* /comparer*")
-local blockdb = fs.open(dir .. "/blocks_db.txt", "r")
-local itemdb = fs.open(dir .. "/items_db.txt", "r")
+local blockdb = fs.open("ComputerCraftMiningPog/apis/comparer/blocks_db.txt", "r")
+local itemdb = fs.open("ComputerCraftMiningPog/apis/comparer/items_db.txt", "r")
 local blocks = {}
 local items = {}
 
