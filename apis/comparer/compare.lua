@@ -42,6 +42,7 @@ function stackInv()
                 turtle.transferTo(j)
         end
     end
+    turtle.select(1)
     if turtle.getItemCount(16) < 1 then
         return(true)
     else
@@ -49,24 +50,22 @@ function stackInv()
     end
 end
 
---[[
 --will compare the block in front of the turtle to the database of valuable blocks.
-function compareBlock()
-    local h, data = turtle.inspect()
-    local i = 1
-    while true do
-        if not blocks[i] then
-            digDrop()
-            break
-        elseif data[name] == blocks[i] then
-            digKeep()
-            break
-        elseif data[name] ~= blocks[i] then
-            i = i + 1
-        end
-    end
-end
---]]
+--function compareBlock()
+--    local h, data = turtle.inspect()
+--    local i = 1
+--    while true do
+--        if not blocks[i] then
+--            digDrop()
+--            break
+--        elseif data[name] == blocks[i] then
+--            digKeep()
+--            break
+--        elseif data[name] ~= blocks[i] then
+--            i = i + 1
+--        end
+--    end
+--end
 
 function compareInv()
     for i=1, 16, 1 do
