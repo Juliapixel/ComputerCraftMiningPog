@@ -67,6 +67,8 @@ end
 local function goForward()
   turtle.dig()
   turtle.forward()
+  compare.stackInv()
+  compare.pruneInv()
 end
 
 function mine.tunnelAhead(dist)
@@ -96,6 +98,7 @@ function mine.tunnelAhead(dist)
   turtle.turnLeft()
   for i=1, dist, 1 do
     goForward()
+    turtle.dig()
   end
 end
 
