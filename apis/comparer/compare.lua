@@ -68,7 +68,7 @@ end
 function compare.pruneInv()
   for i=1, 16, 1 do
     if turtle.getItemDetail() then
-      data = turtle.getItemDetail(i)
+      local data = turtle.getItemDetail(i)
       local j = 1
       while true do
         if not items[j] then
