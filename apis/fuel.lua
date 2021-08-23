@@ -70,14 +70,16 @@ local function selfRefuel()
       waitForFuel()
     local curItem = turtle.getItemDetail(i)
     --determines fuel ammount certain slot will provide. will be false if not in list.
-    for j, v in ipairs(sources) do
-      if curItem["name"] == v["name"] then
-        curItem["power"] = v["power"]
-      elseif not curItem["power"] then
-        curItem["power"] = false
+    if curItem then
+      for j, v in ipairs(sources) do
+        if curItem["name"] == v["name"] then
+          curItem["power"] = v["power"]
+        elseif not curItem["power"] then
+          curItem["power"] = false
+        end
       end
     end
-    if curItem["power"] ~= false then
+    if curItem["power"] then
       if curItem["power"]*curItem["count"] <= additional_fuel_needed then
         turtle.refuel()
       elseif curItem["power"]*curItem["count"] > additional_fuel_needed then
