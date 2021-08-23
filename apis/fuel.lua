@@ -1,6 +1,5 @@
 fuel = {}
 
-local mode = ""
 local totaldist = 1
 
 local coal = {name = "minecraft:coal", power = 80}
@@ -50,17 +49,20 @@ end
 --this function will decide whether the turtle should be refueled manually or automatically and for how many blocks should it refuel itself for.
 --valid modes: "manual", "auto". REQUIRES FULL PLANNED TRAVERSAL DISTANCE. MUST BE CORRECT OR SOCIETY WILL BE IN SHAMBLES.
 function fuel.refuel(varmode, dist)
+  local mode = ""
   if varmode == "manual" or "auto" then
     mode = varmode
   else
     error("not a valid mode for refueling! dumbass.")
   end
   totaldist = dist
-  waitForFuel()
+  if mode =="auto" then
+    
+  else then
+    waitForFuel()
+  end
 end
 
-for i, line in ipairs(sources) do
-  print(line)
-end
+fuel.refuel("manual", 800)
 
 return fuel
