@@ -1,5 +1,6 @@
 mine = {}
 local compare = require("apis.comparer.compare")
+local curDist = 1
 
 local function oreAhead()
   local has_block, data = turtle.inspect()
@@ -65,10 +66,16 @@ local function digOres()
 end
 
 local function goForward()
+  local shouldStop = false
   turtle.dig()
   turtle.forward()
-  compare.stackInv()
-  compare.pruneInv()
+  digOres()
+  if compare.stackInv() then
+    if compare.pruneInv() then
+      shouldStop = true
+    end
+  end
+  return shouldStop
 end
 
 function mine.tunnelAhead(dist)
@@ -92,7 +99,7 @@ function mine.tunnelAhead(dist)
   end
   for i=1, dist, 1 do
     goForward()
-    digOres()
+    curDist = curDist + 1
   end
   turtle.turnLeft()
   turtle.turnLeft()

@@ -19,32 +19,43 @@ function compare.debugdb()
 end
 
 --This function will stack the items in the inventory in a way so that they will take the smallest space possible
---will return true if last inventory slot is empty, will return false if not.
+--will return true if inventory is full
 function compare.stackInv()
   local inv = {}
+  local isFull = true
   for i=1, 16, 1 do
     local data = turtle.getItemDetail(i)
     inv[i] = data
   end
-  for i=1, 16 ,1 do
-    if turtle.getItemDetail(i) then
-      local name = inv[i]["name"]
-      for j=1, i, 1 do
-        if turtle.getItemDetail(j) then
-          if name == inv[j]["name"] then
-            turtle.select(i)
-            turtle.transferTo(j)
+  for i = 1, #inv, 1 do
+    if not inv[i] then
+      isFull = false
+      break
+    end
+  end
+  if isFull == true then
+    for i=1, 16 ,1 do
+      if turtle.getItemDetail(i) then
+        local curname = inv[i]["name"]
+        for j=1, i, 1 do
+          if turtle.getItemDetail(j) then
+            if curname == inv[j]["name"] then
+              turtle.select(i)
+              turtle.transferTo(j)
+            end
           end
         end
       end
     end
   end
-  turtle.select(1)
-  if turtle.getItemCount(16) < 1 then
-    return true
-  else
-    return false
+  for i = 1, #inv, 1 do
+    if not inv[i] then
+      isFull = false
+      break
+    end
   end
+  turtle.select(1)
+  return isFull
 end
 
 --will compare the block in front of the turtle to the database of valuable blocks.
@@ -65,8 +76,10 @@ end
 --end
 
 --Drops any items that are not in the item whitelist.
+--will return true if inventory is full
 function compare.pruneInv()
   local inv = {}
+  local isFull = true
   for i=1, 16, 1 do
     local data = turtle.getItemDetail(i)
     inv[i] = data
@@ -88,6 +101,13 @@ function compare.pruneInv()
     end
   end
   turtle.select(1)
+  for i = 1, #inv, 1 do
+    if not inv[i] then
+      isFull = false
+      break
+    end
+  end
+  return isFull
 end
 
 return compare
