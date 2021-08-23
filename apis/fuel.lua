@@ -79,11 +79,13 @@ local function selfRefuel()
         end
       end
     end
-    if curItem["power"] then
-      if curItem["power"]*curItem["count"] <= additional_fuel_needed then
-        turtle.refuel()
-      elseif curItem["power"]*curItem["count"] > additional_fuel_needed then
-        turtle.refuel(math.ceil(additional_fuel_needed/curItem["power"]))
+    if curItem then
+      if curItem["power"] then
+        if curItem["power"]*curItem["count"] <= additional_fuel_needed then
+          turtle.refuel()
+        elseif curItem["power"]*curItem["count"] > additional_fuel_needed then
+          turtle.refuel(math.ceil(additional_fuel_needed/curItem["power"]))
+        end
       end
     end
   end
