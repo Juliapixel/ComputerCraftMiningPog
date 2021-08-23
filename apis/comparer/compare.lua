@@ -11,8 +11,6 @@ while true do
   items[#items + 1] = line
 end
 
-tabulatedb(itemdb, items)
-
 function debugdb()
   for i=1, #items, 1 do
     print(items[i])
