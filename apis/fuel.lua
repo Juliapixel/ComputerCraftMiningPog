@@ -3,7 +3,7 @@ fuel = {}
 local totaldist = 1
 
 local coal = {name = "minecraft:coal", power = 80}
-local coal_block = {name = "minecraft:coal_block", power = 640}
+local coal_block = {name = "minecraft:coal_block", power = 800}
 local lava_bucket = {name = "minecraft:lava_bucket", power= 1000}
 local sources = {coal, coal_block, lava_bucket}
 
