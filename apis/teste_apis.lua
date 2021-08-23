@@ -1,3 +1,3 @@
 require("mine")
 print("mining for ores...")
-tunnelAhead(4)
+mine.tunnelAhead(4)

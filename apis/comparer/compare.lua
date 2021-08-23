@@ -12,7 +12,7 @@ while true do
   items[#items + 1] = line
 end
 
-function debugdb()
+function compare.debugdb()
   for i=1, #items, 1 do
     print(items[i])
   end
@@ -20,7 +20,7 @@ end
 
 --This function will stack the items in the inventory in a way so that they will take the smallest space possible
 --will return true if last inventory slot is empty, will return false if not.
-function stackInv()
+function compare.stackInv()
   local inv = {}
   for i=1, 16, 1 do
     local data = turtle.getItemDetail(i)
@@ -61,7 +61,7 @@ end
 --end
 
 --Drops any items that are not in the item whitelist.
-function pruneInv()
+function compare.pruneInv()
   for i=1, 16, 1 do
     data = turtle.getItemDetail(i)
     local j = 1
