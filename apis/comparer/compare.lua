@@ -14,9 +14,6 @@ end
 tabulatedb(itemdb, items)
 
 function debugdb()
-  for i=1, #blocks, 1 do
-    print(blocks[i])
-  end
   for i=1, #items, 1 do
     print(items[i])
   end
