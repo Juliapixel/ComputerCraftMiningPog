@@ -97,8 +97,10 @@ function mine.tunnelAhead(dist)
   turtle.turnLeft()
   turtle.turnLeft()
   for i=1, dist, 1 do
-    goForward()
-    turtle.dig()
+    turtle.forward()
+    if turtle.inspect() then
+      turtle.dig()
+    end
   end
 end
 
