@@ -25,9 +25,10 @@ local function waitForFuel()
     local event = os.pullEvent("turtle_inventory")
     local placed_fuel = turtle.getItemDetail(1)
     if placed_fuel then
+      print("item placed")
       --determines fuel ammount certain placed fuel item will provide. will be false if not in list.
       for i, v in ipairs(sources) do
-        if v["name"] == placed_fuel["name"] then
+        if placed_fuel["name"] == v["name"] then
           placed_fuel["power"] = v["power"]
         elseif i == #sources then
           placed_fuel["power"] = false
