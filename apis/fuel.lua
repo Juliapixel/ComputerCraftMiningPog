@@ -58,7 +58,7 @@ function fuel.refuel(varmode, dist)
   totaldist = dist
   if mode =="auto" then
     
-  else then
+  else
     waitForFuel()
   end
 end
