@@ -1,4 +1,5 @@
-require("apis.comparer.compare")
+mine = {}
+local compare = require("apis.comparer.compare")
 
 local function oreAhead()
   local has_block, data = turtle.inspect()
@@ -97,3 +98,5 @@ function tunnelAhead(dist)
     goForward()
   end
 end
+
+return mine

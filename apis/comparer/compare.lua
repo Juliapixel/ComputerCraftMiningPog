@@ -1,3 +1,4 @@
+compare = {}
 local itemdb = fs.open(fs.getDir(shell.getRunningProgram()) .. "/apis/comparer/items_db.txt", "r")
 local items = {}
 
@@ -59,7 +60,8 @@ end
 --  end
 --end
 
-function compareInv()
+--Drops any items that are not in the item whitelist.
+function pruneInv()
   for i=1, 16, 1 do
     data = turtle.getItemDetail(i)
     local j = 1
@@ -75,3 +77,5 @@ function compareInv()
     end
   end
 end
+
+return compare
