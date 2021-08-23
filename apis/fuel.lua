@@ -88,19 +88,9 @@ local function selfRefuel()
 end
 --this function will decide whether the turtle should be refueled manually or automatically and for how many blocks should it refuel itself for.
 --valid modes: "manual", "auto". REQUIRES FULL PLANNED TRAVERSAL DISTANCE. MUST BE CORRECT OR SOCIETY WILL BE IN SHAMBLES.
-function fuel.refuel(varmode, dist)
-  local mode = ""
-  if varmode == "manual" or "auto" then
-    mode = varmode
-  else
-    error("not a valid mode for refueling! dumbass.")
-  end
+function fuel.refuel(dist)
   totaldist = dist
-  if mode =="auto" then
-    selfRefuel()
-  else
-    waitForFuel()
-  end
+  selfRefuel()
 end
 
 return fuel
