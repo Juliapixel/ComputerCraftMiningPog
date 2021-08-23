@@ -29,7 +29,7 @@ local function waitForFuel()
       for i, v in ipairs(sources) do
         if placed_fuel["name"] == v["name"] then
           placed_fuel["power"] = v["power"]
-        elseif i == #sources and placed_fuel["power"] then
+        elseif not placed_fuel["power"] then
           placed_fuel["power"] = false
         end
       end
