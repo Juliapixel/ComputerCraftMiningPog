@@ -66,19 +66,18 @@ end
 
 --Drops any items that are not in the item whitelist.
 function compare.pruneInv()
-  for i=1, 16, 1 do
-    if turtle.getItemDetail() then
+  local success = false
+  for i = 1, 16, 1 do
+    if turtle.getItemDetail(i) then
       local data = turtle.getItemDetail(i)
-      local j = 1
-      while true do
-        if not items[j] then
-          turtle.dropUp()
+      for j = 1, #items, 1 do
+        if data == items[j] then
+          success = true
           break
-        elseif data["name"] ~= items[j] then
-          break
-        else
-          j = j + 1
         end
+      end
+      if not success then
+      turtle.drop()
       end
     end
   end
