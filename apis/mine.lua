@@ -1,4 +1,4 @@
-require("comparer.compare")
+require("apis.comparer.compare")
 
 local function oreAhead()
   local has_block, data = turtle.inspect()
