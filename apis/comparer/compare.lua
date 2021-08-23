@@ -27,11 +27,13 @@ function compare.stackInv()
     inv[i] = data
   end
   for i=1, 16 ,1 do
-    local name = inv[i]["name"]
-    for j=1, i, 1 do
-      if name == inv[j]["name"] then
-        turtle.select(i)
-        turtle.transferTo(j)
+    if turtle.getItemCount() then
+      local name = inv[i]["name"]
+      for j=1, i, 1 do
+        if name == inv[j]["name"] then
+          turtle.select(i)
+          turtle.transferTo(j)
+        end
       end
     end
   end
