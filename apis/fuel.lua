@@ -12,16 +12,25 @@ local function waitForFuel()
   local ammount_needed = 1
   while true do
     local additional_fuel_needed = totaldist - turtle.getFuelLevel()
+    --will end the wait if enough fuel is already inserted.
     if additional_fuel_needed <= 0 then
+      term.clear()
+      term.setCursorPos(1,1)
+      print("fuel sufficient!")
+      write("beninging")
+      textutils.slowPrint("...", 1)
       break
     end
     term.clear()
     term.setCursorPos(1,1)
+    --iterates through the table of available fuel sources and tells you how many of each of the available sources you will need to fill your tank up to an acceptable level
+    print("you're gonna need at least:")
     for i, item in ipairs(sources) do
       ammount_needed = math.ceil(additional_fuel_needed/item["power"])
-      print(string.format("you  need %d more %s in order to start the turtle!", ammount_needed, string.gsub(string.gsub(item["name"], "minecraft:", ""), "_", " ")))
+      print(string.format("%d more %s", ammount_needed, string.gsub(string.gsub(item["name"], "minecraft:", ""), "_", " ")))
     end
-    print("please place it in the first inventory slot!")
+    print("in order to start the turtle.")
+    print("please place it in the first inventory slot.")
     local event = os.pullEvent("turtle_inventory")
     local placed_fuel = turtle.getItemDetail(1)
     if placed_fuel then
@@ -62,7 +71,5 @@ function fuel.refuel(varmode, dist)
     waitForFuel()
   end
 end
-
-fuel.refuel("manual", 800)
 
 return fuel
