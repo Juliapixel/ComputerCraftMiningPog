@@ -1,5 +1,6 @@
 mine = {}
 local compare = require("apis.comparer.compare")
+local fuel = require("apis.fuel")
 local curDist = 1
 
 local function oreAhead()
@@ -65,38 +66,22 @@ local function digOres()
   turtle.turnLeft()
 end
 
+--makes turtle go forward and mine for ores around itself every time it does so.
 local function goForward()
-  local shouldStop = false
   turtle.dig()
   turtle.forward()
   digOres()
-  if compare.stackInv() then
-    if compare.pruneInv() then
-      shouldStop = true
-    end
+  local isFull = compare.pruneInv()
+  if isFull then
+    isFull = compare.stackInv()
   end
-  return shouldStop
+  return isFull
 end
 
 function mine.tunnelAhead(dist)
   dist = tonumber(dist)
   local full_dist = 2*dist
-  if turtle.getFuelLevel() < 2 then
-    print("no fuel! cancelling...")
-    return false
-  end
-  if full_dist > turtle.getFuelLevel() then
-    dist = turtle.getFuelLevel()/2
-    print(string.format("not enough fuel, will only mine for %d blocks! proceed anyway? (y/n)", dist))
-    write("> ")
-    local input = string.lower(read())
-    if input == "y" then
-      print("proceeding!")
-    else
-      print("cancelled.")
-      return false
-    end
-  end
+  fuel.refuel(full_dist)
   for i=1, dist, 1 do
     goForward()
     curDist = curDist + 1

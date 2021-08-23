@@ -84,6 +84,7 @@ function compare.pruneInv()
     local data = turtle.getItemDetail(i)
     inv[i] = data
   end
+  --drops items not in whitelist
   for i = 1, 16, 1 do
     local success = false
     if turtle.getItemDetail(i) then
@@ -101,7 +102,8 @@ function compare.pruneInv()
     end
   end
   turtle.select(1)
-  for i = 1, #inv, 1 do
+  --will return false if any of the slots are empty
+  for i = 1, 16, 1 do
     if not inv[i] then
       isFull = false
       break
