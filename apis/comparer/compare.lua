@@ -74,6 +74,7 @@ function compare.pruneInv()
   for i = 1, 16, 1 do
     local success = false
     if turtle.getItemDetail(i) then
+      turtle.select(i)
       local name = inv[i]["name"]
       for j = 1, #items, 1 do
         if name == items[j] then
@@ -86,6 +87,7 @@ function compare.pruneInv()
       end
     end
   end
+  turtle.select(1)
 end
 
 return compare
