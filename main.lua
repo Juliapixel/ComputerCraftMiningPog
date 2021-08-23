@@ -2,6 +2,7 @@ args = {...}
 local mine = require("apis.mine")
 local compare = require("apis.comparer.compare")
 local fuel = require("apis.fuel")
+tonumber(arg[1])
 if type(arg[1]) ~= "number" then
   error("not a number!")
   return false
