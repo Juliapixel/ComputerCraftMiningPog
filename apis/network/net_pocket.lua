@@ -7,6 +7,10 @@ rednet.host("julia", os.getComputerLabel())
 local worker_info = {}
 local initialAmmount = 0
 
+local function noDevices()
+  printError("no devices found! try moving closer or restarting program.")
+end
+
 --discovers all the turtles in the network and tabulates their base info into the worker_info table
 local function discover()
   rednet.broadcast("sendInfo", "julia")
@@ -21,6 +25,10 @@ local function discover()
       i = i + 1
     elseif not workerinfo then
       initialAmmount = #worker_info
+        if not worker_info then
+          noDevices()
+          return
+        end
       break
     end
   end
