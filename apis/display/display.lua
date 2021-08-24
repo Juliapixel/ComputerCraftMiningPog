@@ -14,24 +14,17 @@ local function initWindows()
   end
 end
 
-
--- returns the color for the background of the first line of each devices window
-local function colorizeFirstLine()
-  local col = ""
-  for i = 1, #devices do
+-- prints device name and current task on the first line with correct colors
+local function printDeviceStatus()
+  for i = 1,#dev_windows do
+    local col = ""
     if devices[i]["present"] == true then
       col = colors.green
     else
       col = colors.red
     end
-    return col
-  end
-end
-
--- prints device name and current task on the first line with correct colors
-local function printDeviceStatus()
-  for i = 1,#dev_windows do
-    dev_windows[i].setBackgroundColor(colorizeFirstLine())
+    
+    dev_windows[i].setBackgroundColor(col)
     dev_windows[i].clearLine()
     dev_windows[i].write(devices[i]["name"])
     dev_windows[i].setCursorPos(w - #devices[i]["curTask"] + 1, 1)
