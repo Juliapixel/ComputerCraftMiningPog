@@ -10,7 +10,7 @@ rednet.host("julia", os.getComputerLabel())
 
 --will wair for received commands and act upon them.
 --available commands are:  "amMaster", "sendInfo", "heartbeat"
-function netTurtle.waitForCommand()
+local function waitForCommand()
   local senderID, command = rednet.receive("julia")
   if command == "worker_info" then
     rednet.send(senderID, worker_info, "julia")
@@ -19,4 +19,7 @@ function netTurtle.waitForCommand()
   end
 end
 
+function net.run()
+  waitForCommand()
+end
 return netTurtle
