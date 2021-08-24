@@ -14,32 +14,28 @@ local function initWindows()
   end
 end
 
--- prints device name and current task on the first line
-local function printDeviceStatus()
-  local isWorkingText = ""
-  for i = 1,#dev_windows do
-    write(devices[i]["name"])
-    dev_windows[i].setCursorPos(w - #devices[i]["curTask"], 1)
-    write(devices[i]["curTask"])
+
+-- returns the color for the background of the first line of each devices window
+local function colorizeFirstLine()
+  local col = ""
+  for i = 1, #dev_windows do
+    if devices[i]["present"] == false then
+      col = colors.red
+    else
+      col = colors.green
+    end
+    return col
   end
 end
 
--- sets color for the background of the first line of each devices window and prints their info
-local function colorizeWindows()
-  for i = 1, #dev_windows do
-    dev_windows[i].setCursorPos(1,1)
-    if devices[i]["present"] then
-      dev_windows[i].setBackgroundColor(colors.gray)
-      printDeviceStatus()
-    end
-    if devices[i]["curTask"] ~= "" then
-      dev_windows[i].setBackgroundColor(colors.green)
-      printDeviceStatus()
-    end
-    if not devices[i]["present"] then
-      dev_windows[i].setBackgroundColor(colors.red)
-      printDeviceStatus()
-    end
+-- prints device name and current task on the first line with correct colors
+local function printDeviceStatus()
+  for i = 1,#dev_windows do
+    dev_windows[i].setBackGroundColor(colorizeFirstLine())
+    dev_windows[i].clearLine()
+    write(devices[i]["name"])
+    dev_windows[i].setCursorPos(w - #devices[i]["curTask"] + 1, 1)
+    write(devices[i]["curTask"])
   end
 end
 
@@ -49,7 +45,7 @@ function display.updateDisplay(worker_info)
   print(textutils.serialise(devices))
   while true do
   initWindows()
-  colorizeWindows()
+  printDeviceStatus()
   sleep (2)
   end
 end
