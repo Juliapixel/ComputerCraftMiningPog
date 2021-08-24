@@ -19,10 +19,10 @@ end
 local function colorizeFirstLine()
   local col = ""
   for i = 1, #devices do
-    if devices[i]["present"] == false then
-      col = colors.red
-    else
+    if devices[i]["present"] == true then
       col = colors.green
+    else
+      col = colors.red
     end
     return col
   end
