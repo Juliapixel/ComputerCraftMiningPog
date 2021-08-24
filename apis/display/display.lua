@@ -24,7 +24,7 @@ local function printDeviceStatus()
   end
 end
 
--- sets color for the background of the first line of each devices window
+-- sets color for the background of the first line of each devices window and prints their info
 local function colorizeWindows()
   for i = 1, #dev_windows do
     dev_windows[i].setCursorPos(1,1)
@@ -46,7 +46,6 @@ function display.updateDisplay(worker_info)
   devices = worker_info
   while true do
   initWindows()
-  printDeviceStatus()
   colorizeWindows()
   end
 end

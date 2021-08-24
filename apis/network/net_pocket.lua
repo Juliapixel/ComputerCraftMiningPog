@@ -58,11 +58,10 @@ end
 
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
-  rednet.open("back")
-  rednet.host("julia", os.getComputerLabel())
   discover()
   while true do
-    parallel.waitForAll(parallel.waitForAny(updateAll(), display.requestReload()), display.updateDisplay(#worker_info))
+    updateAll()
+    parallel.waitForAny(display.requestReload(), display.updateDisplay(#worker_info), sleep(2))
   end
 end
 

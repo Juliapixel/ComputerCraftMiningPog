@@ -17,8 +17,6 @@ local function waitForCommand()
 end
 
 function netTurtle.run()
-  rednet.open("left")
-  rednet.host("julia", os.getComputerLabel())
   waitForCommand()
 end
 return netTurtle
