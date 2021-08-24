@@ -40,7 +40,6 @@ end
 function display.updateDisplay(worker_info)
   os.startTimer(2)
   devices = worker_info
-  print(textutils.serialise(devices))
   initWindows()
   printDeviceStatus()
   local event = os.pullEvent("timer")

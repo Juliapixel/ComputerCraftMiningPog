@@ -50,6 +50,7 @@ end
 
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
+  term.clear()
   while true do
     discover()
     if next(worker_info) then
