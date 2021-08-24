@@ -41,12 +41,13 @@ end
 
 -- takes table of wokers and their info and updates all the windows and their info
 function display.updateDisplay(worker_info)
+  os.startTimer(2)
   devices = worker_info
   while true do
   print(textutils.serialise(devices))
   initWindows()
   printDeviceStatus()
-  sleep(2)
+  local event = os.pullEvent("timer")
   end
 end
 
