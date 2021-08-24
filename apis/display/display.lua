@@ -42,14 +42,16 @@ local function colorizeWindows()
 end
 
 function display.updateDisplay()
+  while true do
   initWindows()
   printDeviceStatus()
   colorizeWindows()
   sleep(2)
+  end
 end
 
 function display.requestReload()
-  
+
 end
 
 return display
