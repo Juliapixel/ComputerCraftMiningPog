@@ -21,7 +21,7 @@ local function discover()
     if workerinfo then
       worker_info[i] = workerinfo
       i = i + 1
-    elseif not workerinfo then
+    elseif not senderID then
       initialAmmount = #worker_info
       break
     end
