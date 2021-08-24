@@ -45,7 +45,7 @@ end
 local function updateAll()
   os.startTimer(5)
   for i = 1, initialAmmount do
-    if worker_info[i]["ID"] then 
+    if worker_info[i] then 
       updateInfo(worker_info[i]["ID"])
     end
   end
