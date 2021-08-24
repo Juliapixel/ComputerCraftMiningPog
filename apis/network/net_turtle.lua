@@ -12,7 +12,7 @@ local master = 1
 
 --will wair for received commands and act upon them.
 --available commands are:  "amMaster", "sendInfo"
-local function waitForCommand()
+function netTurtle.waitForCommand()
   while true do
     local senderID, command = rednet.receive("julia")
     if command == "sendInfo" then
