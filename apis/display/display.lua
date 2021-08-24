@@ -1,15 +1,13 @@
-local netPocket = netPocket or require("apis.network.net_pocket")
-
 display = {}
 
-local devices = netPocket.display()
+local devices = {}
 local w, h = term.getSize()
 local dev_windows = {}
 
 local mainwindow = window.create(term.current, 1, 2, w, h - 2)
 
 -- initializes windows for all devices in network
-local function initWindows()
+local function initWindows(devices)
   dev_windows = {}
   for i = 1, #devices do
     dev_windows[i] = window.create(mainwindow, 1, i * 2 - 1, w, 2)
@@ -43,8 +41,9 @@ local function colorizeWindows()
   end
 end
 
--- updates all the windows and their info
-function display.updateDisplay()
+-- takes table of wokers and their info and updates all the windows and their info
+function display.updateDisplay(worker_info)
+  devices = worker_info
   while true do
   initWindows()
   printDeviceStatus()

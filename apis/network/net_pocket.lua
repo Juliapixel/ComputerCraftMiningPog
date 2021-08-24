@@ -54,13 +54,8 @@ end
 function netPocket.run()
   discover()
   while true do
-    parallel.waitForAny(updateAll(), display.requestReload())
+    parallel.waitForAll(parallel.waitForAny(updateAll(), display.requestReload()), display.updateDisplay(#worker_info))
   end
-end
-
--- returns the ammount of workers as a number and their info in a table
-function netPocket.display()
-  return worker_info
 end
 
 return netPocket
