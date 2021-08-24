@@ -23,10 +23,6 @@ local function discover()
       i = i + 1
     elseif not workerinfo then
       initialAmmount = #worker_info
-        if not worker_info then
-          noDevices()
-          return
-        end
       break
     end
   end
@@ -59,9 +55,13 @@ end
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
   discover()
-  while true do
-    updateAll()
-    parallel.waitForAny(display.requestReload(), display.updateDisplay(#worker_info), sleep(2))
+  if worker_info then
+    while true do
+      updateAll()
+      parallel.waitForAny(display.requestReload(), display.updateDisplay(#worker_info), sleep(2))
+    end
+  else
+    printError("no devices in network!")
   end
 end
 
