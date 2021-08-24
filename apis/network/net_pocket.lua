@@ -29,28 +29,25 @@ local function discover()
 end
 
 -- updates the info of the given device. won't update if rednet.receive times out, will change "present" to false
-local function updateInfo(turtleID)
+local function updateInfo(request_ID, index)
   for i = 1 , initialAmmount, 1 do
-    rednet.send(turtleID, "sendInfo", "julia")
-    info = rednet.receive("julia", 1)
+    rednet.send(request_ID, "sendInfo", "julia")
+    local info = rednet.receive("julia", 2)
     if not info then
-      worker_info[i]["present"] = false
+      worker_info[index]["present"] = false
     else
-      worker_info[i] = info
+      worker_info[index] = info
     end
   end
 end
 
 -- calls updateInfo() for every device it has ever come into contact with
 local function updateAll()
-  os.startTimer(5)
   for i = 1, initialAmmount do
     if worker_info[i] then
-      local requestID = worker_info[i]["ID"]
-      updateInfo(requestID)
+      updateInfo(worker_info["ID"], i)
     end
   end
-  event = os.pullEvent(timer)
 end
 
 -- will return the initial ammount of devices found and their respective info
