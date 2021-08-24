@@ -50,15 +50,18 @@ end
 
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
-  discover()
-  if next(worker_info) then
-    print("workers found!")
-    while true do
-      updateAll()
-      parallel.waitForAny(display.requestReload(), display.updateDisplay(worker_info))
+  while true do
+    discover()
+    if next(worker_info) then
+      print("workers found!")
+      while true do
+        updateAll()
+        parallel.waitForAny(display.updateDisplay(worker_info), display.requestReload())
+      end
+    else
+      printError("no devices in network!")
+      break
     end
-  else
-    printError("no devices in network!")
   end
 end
 

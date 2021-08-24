@@ -46,7 +46,7 @@ function display.updateDisplay(worker_info)
   print(textutils.serialise(devices))
   initWindows()
   printDeviceStatus()
-  sleep (2)
+  sleep(2)
   end
 end
 
