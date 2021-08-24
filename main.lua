@@ -11,4 +11,6 @@ if turtle then
   end
   parallel.waitForAny(mine.tunnelAhead(arg[1]), net.run())
 end
-if pocket then.
+if pocket then
+  net.run()
+end
