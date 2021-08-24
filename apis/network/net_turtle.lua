@@ -7,7 +7,7 @@ local worker_info = {
   name = os.getComputerLabel(),
   role = "miner",
   progress = mine.progress(),
-  present = false,
+  present = true,
   curTask = ""
 }
 local master = 1

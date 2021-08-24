@@ -20,10 +20,14 @@ local function printDeviceStatus()
     local col = ""
     if devices[i]["present"] == true then
       col = colors.green
-    else
+    end
+    if devices[i]["curTask"] == "" then
+      col = colors.gray
+    end
+    if devices[i]["present"] ~= true then
       col = colors.red
     end
-    
+
     dev_windows[i].setBackgroundColor(col)
     dev_windows[i].clearLine()
     dev_windows[i].write(devices[i]["name"])

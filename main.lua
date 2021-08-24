@@ -9,7 +9,7 @@ if turtle then
     error("not a number!")
     return false
   end
-  parallel.waitForAny(mine.tunnelAhead(arg[1]), net.run())
+  parallel.waitForAny(net.run(), mine.tunnelAhead(arg[1]))
 end
 if pocket then
   net.run()
