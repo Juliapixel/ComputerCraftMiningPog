@@ -54,7 +54,7 @@ end
 function netPocket.run()
   discover()
   if next(worker_info) then
-    textutils.slowPrint("workers found!")
+    print("workers found!")
     while true do
       updateAll()
       parallel.waitForAny(display.requestReload(), display.updateDisplay(worker_info), sleep(2))
