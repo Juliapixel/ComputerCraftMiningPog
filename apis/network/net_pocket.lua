@@ -32,7 +32,7 @@ end
 local function updateInfo(request_ID, index)
   for i = 1 , initialAmmount, 1 do
     rednet.send(request_ID, "sendInfo", "julia")
-    local info = rednet.receive("julia", 2)
+    local ID, info = rednet.receive("julia", 2)
     if not info then
       worker_info[index]["present"] = false
     else
