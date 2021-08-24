@@ -9,10 +9,10 @@ rednet.open("left")
 rednet.host("julia", os.getComputerLabel())
 
 --will wair for received commands and act upon them.
---available commands are:  "amMaster", "sendInfo", "heartbeat"
+--available commands are:  "amMaster", "sendInfo"
 local function waitForCommand()
   local senderID, command = rednet.receive("julia")
-  if command == "worker_info" then
+  if command == "sendInfo" then
     rednet.send(senderID, worker_info, "julia")
   elseif command == "amMaster" then
     master = senderID
