@@ -1,6 +1,6 @@
-local netPocket = require("apis.network.net_pocket")
-local netDesktop = require("apis.network.net_desktop")
-local netTurtle = require("apis.network.net_turtle")
+local netPocket = netPocket or require("apis.network.net_pocket")
+local netDesktop = netDesktop or require("apis.network.net_desktop")
+local netTurtle = netTurtle or require("apis.network.net_turtle")
 
 net = {}
 

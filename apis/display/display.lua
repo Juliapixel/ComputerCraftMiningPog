@@ -1,5 +1,5 @@
 package.loaded("apis.network.net_pocket")
-local netPocket = require("apis.network.net_pocket")
+local netPocket = netPocket or require("apis.network.net_pocket")
 
 display = {}
 
