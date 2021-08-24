@@ -2,7 +2,14 @@ local mine = require("apis.mine")
 
 netTurtle = {}
 
-local worker_info = {ID = os.getComputerID(),name = os.getComputerLabel(), role = "miner", progress = mine.progress(), present = false, curTask = ""}
+local worker_info = {
+  ID = os.getComputerID(),
+  name = os.getComputerLabel(),
+  role = "miner",
+  progress = mine.progress(),
+  present = false,
+  curTask = ""
+}
 local master = 1
 
 --will wair for received commands and act upon them.
