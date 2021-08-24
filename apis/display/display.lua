@@ -31,7 +31,7 @@ end
 -- prints device name and current task on the first line with correct colors
 local function printDeviceStatus()
   for i = 1,#dev_windows do
-    dev_windows[i].setBackGroundColor(colorizeFirstLine())
+    dev_windows[i].setBackgroundColor(colorizeFirstLine())
     dev_windows[i].clearLine()
     write(devices[i]["name"])
     dev_windows[i].setCursorPos(w - #devices[i]["curTask"] + 1, 1)
