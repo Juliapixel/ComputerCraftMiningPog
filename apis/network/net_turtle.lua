@@ -8,8 +8,6 @@ local master = 1
 --will wair for received commands and act upon them.
 --available commands are:  "amMaster", "sendInfo"
 local function waitForCommand()
-  rednet.open("left")
-  rednet.host("julia", os.getComputerLabel())
   local senderID, command = rednet.receive("julia")
   if command == "sendInfo" then
     rednet.send(senderID, worker_info, "julia")
@@ -19,6 +17,8 @@ local function waitForCommand()
 end
 
 function netTurtle.run()
+  rednet.open("back")
+  rednet.host("julia", os.getComputerLabel())
   waitForCommand()
 end
 return netTurtle
