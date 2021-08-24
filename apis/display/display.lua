@@ -7,7 +7,7 @@ local dev_windows = {}
 local mainwindow = window.create(term.current(), 1, 2, w, h - 2)
 
 -- initializes windows for all devices in network
-local function initWindows(devices)
+local function initWindows()
   dev_windows = {}
   for i = 1, #devices do
     dev_windows[i] = window.create(mainwindow, 1, i * 2 - 1, w, 2)
@@ -19,7 +19,7 @@ local function printDeviceStatus()
   local isWorkingText = ""
   for i = 1,#dev_windows do
     write(devices[i]["name"])
-    windows[i].setCursorPos(w - #devices[i]["curTask"], 1)
+    dev_windows[i].setCursorPos(w - #devices[i]["curTask"], 1)
     write(devices[i]["curTask"])
   end
 end
@@ -31,10 +31,12 @@ local function colorizeWindows()
     if devices[i]["present"] then
       dev_windows[i].setBackgroundColor(colors.gray)
       printDeviceStatus()
-    elseif devices[i]["working"] then
+    end
+    if devices[i]["curTask"] ~= "" then
       dev_windows[i].setBackgroundColor(colors.green)
       printDeviceStatus()
-    elseif not devices[i]["present"] then
+    end
+    if not devices[i]["present"] then
       dev_windows[i].setBackgroundColor(colors.red)
       printDeviceStatus()
     end
@@ -44,9 +46,11 @@ end
 -- takes table of wokers and their info and updates all the windows and their info
 function display.updateDisplay(worker_info)
   devices = worker_info
+  print(textutils.serialise(devices))
   while true do
   initWindows()
   colorizeWindows()
+  sleep (2)
   end
 end
 
