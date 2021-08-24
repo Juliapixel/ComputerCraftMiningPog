@@ -30,7 +30,7 @@ end
 
 -- updates the info of the given device. won't update if rednet.receive times out, will change "present" to false
 local function updateInfo(turtleID)
-  for i = 1 , #worker_info, 1 do
+  for i = 1 , initialAmmount, 1 do
     rednet.send(turtleID, "sendInfo", "julia")
     info = rednet.receive("julia", 1)
     if not info then
@@ -59,7 +59,7 @@ function netPocket.run()
     textutils.slowPrint("workers found!")
     while true do
       updateAll()
-      parallel.waitForAny(display.requestReload(), display.updateDisplay(#worker_info), sleep(2))
+      parallel.waitForAny(display.requestReload(), display.updateDisplay(worker_info), sleep(2))
     end
   else
     printError("no devices in network!")
