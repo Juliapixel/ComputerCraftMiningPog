@@ -33,9 +33,9 @@ local function printDeviceStatus()
   for i = 1,#dev_windows do
     dev_windows[i].setBackgroundColor(colorizeFirstLine())
     dev_windows[i].clearLine()
-    write(devices[i]["name"])
+    dev_windows[i].write(devices[i]["name"])
     dev_windows[i].setCursorPos(w - #devices[i]["curTask"] + 1, 1)
-    write(devices[i]["curTask"])
+    dev_windows[i].write(devices[i]["curTask"])
   end
 end
 
