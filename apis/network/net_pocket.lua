@@ -1,3 +1,5 @@
+local display = require("apis.display.display")
+
 netPocket = {}
 
 rednet.open("back")
@@ -7,8 +9,9 @@ local initialAmmount = 0
 
 --discovers all the turtles in the network and tabulates their base info into the worker_info table
 local function discover()
-  rednet.broadcast("listWorkers", "julia")
+  rednet.broadcast("sendInfo", "julia")
   local senderID = 1
+  worker_info = {}
   local workerinfo = {}
   local i = 1
   while true do
@@ -23,10 +26,11 @@ local function discover()
   end
 end
 
+-- updates the info of the given device. won't update if rednet.receive times out, will change "present" to false
 local function updateInfo(turtleID)
   for i =1 , #worker_info, 1 do
     rednet.send(turtleID, "worker_info", "julia")
-    info = rednet.receive("julia", 2)
+    info = rednet.receive("julia", 1)
     if not info then
       worker_info[i]["present"] = false
     else
@@ -35,30 +39,22 @@ local function updateInfo(turtleID)
   end
 end
 
+-- calls updateInfo() for every device it has ever come into contact with
 local function updateAll()
+  os.startTimer(5)
   for i = 1, initialAmmount do
     if worker_info[i]["ID"] then 
       updateInfo(worker_info[i]["ID"])
     end
   end
-end
-
-local function heartbeatAll()
-  for i = 1, initialAmmount do
-    if worker_info[i]["ID"] then
-      rednet.send(worker_info[i]["ID"], "heartbeat")
-      if not rednet.receive("julia", 3) then
-        worker_info[i]["present"] = false
-      end
-    end
-  end
+  event = os.pullEvent(timer)
 end
 
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
   discover()
   while true do
-    updateAll()
+    parallel.waitForAny(updateAll(), display.requestReload())
   end
 end
 
