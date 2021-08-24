@@ -4,7 +4,7 @@ local devices = {}
 local w, h = term.getSize()
 local dev_windows = {}
 
-local mainwindow = window.create(term.current, 1, 2, w, h - 2)
+local mainwindow = window.create(term.current(), 1, 2, w, h - 2)
 
 -- initializes windows for all devices in network
 local function initWindows(devices)
