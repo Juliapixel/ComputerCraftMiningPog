@@ -1,13 +1,14 @@
-local netPocket = require("apis.network.net_pocket")
+local netPocketDisplay = require("apis.network.net_pocket")
 
 display = {}
 
-local devices = netPocket.display()
+local devices = netPocketDisplay.display()
 local w, h = term.getSize()
 local dev_windows = {}
 
 local mainwindow = window.create(term.current, 1, 2, w, h - 2)
 
+-- initializes windows for all devices in network
 local function initWindows()
   dev_windows = {}
   for i = 1, #devices do
@@ -15,6 +16,7 @@ local function initWindows()
   end
 end
 
+-- prints device name and current task on the first line
 local function printDeviceStatus()
   local isWorkingText = ""
   for i = 1,#dev_windows do
@@ -41,12 +43,12 @@ local function colorizeWindows()
   end
 end
 
+-- updates all the windows and their info
 function display.updateDisplay()
   while true do
   initWindows()
   printDeviceStatus()
   colorizeWindows()
-  sleep(2)
   end
 end
 

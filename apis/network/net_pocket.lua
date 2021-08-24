@@ -54,7 +54,7 @@ end
 function netPocket.run()
   discover()
   while true do
-    parallel.waitForAll(parallel.waitForAny(updateAll(), display.requestReload()), display.updateDisplay())
+    parallel.waitForAny(updateAll(), display.requestReload())
   end
 end
 
