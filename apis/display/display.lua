@@ -18,17 +18,13 @@ end
 -- returns the color for the background of the first line of each devices window
 local function colorizeFirstLine()
   local col = ""
-  for i = 1, #dev_windows do
-    if devices[i] then
-      if devices[i]["present"] == false then
-        col = colors.red
-      else
-        col = colors.green
-      end
-      return col
+  for i = 1, #devices do
+    if not devices[i]["present"] then
+      col = colors.red
     else
-      return colors.red
+      col = colors.green
     end
+    return col
   end
 end
 
