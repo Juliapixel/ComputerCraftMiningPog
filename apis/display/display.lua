@@ -42,8 +42,8 @@ end
 -- takes table of wokers and their info and updates all the windows and their info
 function display.updateDisplay(worker_info)
   devices = worker_info
-  print(textutils.serialise(devices))
   while true do
+  print(textutils.serialise(devices))
   initWindows()
   printDeviceStatus()
   sleep (2)

@@ -30,14 +30,12 @@ end
 
 -- updates the info of the given device. won't update if rednet.receive times out, will change "present" to false
 local function updateInfo(request_ID, index)
-  for i = 1 , initialAmmount do
-    rednet.send(request_ID, "sendInfo", "julia")
-    local ID, info = rednet.receive("julia", 2)
-    if not info then
-      worker_info[index]["present"] = false
-    else
-      worker_info[index] = info
-    end
+  rednet.send(request_ID, "sendInfo", "julia")
+  local ID, info = rednet.receive("julia", 2)
+  if not info then
+    worker_info[index]["present"] = false
+  else
+    worker_info[index] = info
   end
 end
 
