@@ -19,7 +19,7 @@ local function waitForCommand()
   end
 end
 
-function net.run()
+function netTurtle.run()
   waitForCommand()
 end
 return netTurtle
