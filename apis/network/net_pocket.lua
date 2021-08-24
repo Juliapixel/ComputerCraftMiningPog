@@ -55,7 +55,7 @@ end
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
   discover()
-  if worker_info then
+  if next(worker_info) then
     textutils.slowPrint("workers found!")
     while true do
       updateAll()
