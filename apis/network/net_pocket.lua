@@ -45,7 +45,7 @@ end
 local function updateAll()
   for i = 1, initialAmmount do
     if worker_info[i] then
-      updateInfo(worker_info["ID"], i)
+      updateInfo(worker_info[i]["ID"], i)
     end
   end
 end
