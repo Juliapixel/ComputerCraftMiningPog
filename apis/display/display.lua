@@ -1,8 +1,9 @@
-local netPocketDisplay = require("apis.network.net_pocket")
+package.loaded("apis.network.net_pocket")
+local netPocket = require("apis.network.net_pocket")
 
 display = {}
 
-local devices = netPocketDisplay.display()
+local devices = netPocket.display()
 local w, h = term.getSize()
 local dev_windows = {}
 
