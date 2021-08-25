@@ -85,6 +85,9 @@ function netPocket.run()
           sleep(1)
         end
       end
+    else
+      term.clear()
+      break
     end
     if shouldKeepRunning == false then
       break
