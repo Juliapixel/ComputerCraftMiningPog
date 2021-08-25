@@ -21,7 +21,7 @@ local function createHeader()
   header.clear()
   header.setCursorPos(1, 1)
   header.write("(Q)uit")
-  header.setCursorPos(w - 7)
+  header.setCursorPos(w - 7, 1)
   header.write("(R)eload")
 end
 
