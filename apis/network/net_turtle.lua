@@ -31,7 +31,7 @@ end
 -- updates the worker_info table to send up to date info to receivers
 -- available names: role, progress, curTask
 function netTurtle.updateInfo(name, value)
-  if isForbiddenName then
+  if isForbiddenName(name) then
     error("tried to change forbidden value in turtle info!", 2)
   end
   worker_info[name] = value
