@@ -30,13 +30,33 @@ local function printDeviceStatus()
   mainwindow.clear()
   for i = 1,#dev_windows do
     local col = ""
+    local choose_col = function(choice)
+      case = {
+        idle = function()
+          col = colors.gray
+        end,
+        mining = function()
+          col = colors.green
+        end,
+        refuelling = function()
+          col = colors.brown
+        end,
+        needs_fuel = function()
+          col = colors.orange
+        end,
+        unknown = function()
+          col = colors.black
+        end
+      }
+      if case[choice] then
+        case[choice]()
+      else
+        case["unknown"]()
+      end
+    end
     if devices[i]["present"] == true then
-      col = colors.green
-    end
-    if devices[i]["curTask"] == "" then
-      col = colors.gray
-    end
-    if devices[i]["present"] ~= true then
+      choose_col(string.gsub(devices[i]["curTask"], " ", "_"))
+    else
       col = colors.red
     end
     dev_windows[i].clear()

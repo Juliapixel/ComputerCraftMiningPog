@@ -6,7 +6,7 @@ local worker_info = {
   role = "miner",
   progress = 0,
   present = true,
-  curTask = ""
+  curTask = "idle"
 }
 local master = 1
 
