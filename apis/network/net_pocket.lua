@@ -60,6 +60,7 @@ function netPocket.run()
       if next(worker_info) then
         shouldKeepRunning = true
         while true do
+          command = ""
           local function wrapperUpdateDisplay()
             return display.updateDisplay(worker_info)
           end
