@@ -16,7 +16,7 @@ end
 
 local function createHeader()
   local header
-  header = windows.create(term.current(), 1, 1, w, 1)
+  header = window.create(term.current(), 1, 1, w, 1)
   header.setBackgroundColor(colors.blue)
   header.clear()
   header.setCursorPos(1, 1)
