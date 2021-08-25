@@ -51,17 +51,34 @@ end
 -- will return the initial ammount of devices found and their respective info
 function netPocket.run()
   term.clear()
+  local shouldKeepRunning = false
   while true do
+    worker_info = {}
     discover()
     if next(worker_info) then
       print("workers found!")
       while true do
+        local function wrapperFunc()
+          display.updateDisplay(worker_info)
+        end
         updateAll()
-        parallel.waitForAny(display.updateDisplay(worker_info), display.requestReload())
+        parallel.waitForAny(wrapperFunc, display.requestReload)
       end
-    else
-      printError("no devices in network!")
+    elseif not shouldKeepRunning then
+      print("no devices found! keep searching? (y/n)")
+      local event, key = os.pullEvent("keys")
+      if key == keys.y then
+        shouldKeepRunning = true
+        print("continuing search...")
+      else
+        print("search cancelled.")
+        sleep(1)
+      end
+    end
+    if not shouldKeepRunning then
       break
+    else
+      sleep(1)
     end
   end
 end
