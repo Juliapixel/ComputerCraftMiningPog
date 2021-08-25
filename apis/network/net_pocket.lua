@@ -52,33 +52,38 @@ end
 function netPocket.run()
   term.clear()
   local shouldKeepRunning = false
+  local command = ""
   while true do
     worker_info = {}
     discover()
-    if next(worker_info) then
-      print("workers found!")
-      while true do
-        local function wrapperFunc()
-          display.updateDisplay(worker_info)
-        end
-        updateAll()
-        parallel.waitForAny(wrapperFunc, display.requestReload)
-      end
-    elseif not shouldKeepRunning then
-      print("no devices found! keep searching? (y/n)")
-      local event, key = os.pullEvent("keys")
-      if key == keys.y then
+    if command ~= "quit" then
+      if next(worker_info) then
         shouldKeepRunning = true
-        print("continuing search...")
-      else
-        print("search cancelled.")
-        sleep(1)
+        while true do
+          local function wrapperUpdateDisplay()
+            return display.updateDisplay(worker_info)
+          end
+          local function wrapperWaitForButtons()
+            command = display.waitForButtons()
+          end
+          updateAll()
+          parallel.waitForAny(wrapperUpdateDisplay, wrapperWaitForButtons)
+        end
+      elseif shouldKeepRunning == false then
+        print("no devices found! keep searching? (y/n)")
+
+        local event, key = os.pullEvent("key")
+        if key == keys.y then
+          shouldKeepRunning = true
+          print("continuing search...")
+        else
+          print("search cancelled.")
+          sleep(1)
+        end
       end
     end
-    if not shouldKeepRunning then
+    if shouldKeepRunning == false then
       break
-    else
-      sleep(1)
     end
   end
 end

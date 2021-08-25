@@ -14,6 +14,17 @@ local function initWindows()
   end
 end
 
+local function createHeader()
+  local header
+  header = windows.create(term.current(), 1, 1, w, 1)
+  header.setBackgroundColor(colors.blue)
+  header.setCursorPos(1, 1)
+  header.write("X")
+  header.setCursorPos(w - 5)
+  header.write("Reload")
+
+end
+
 -- prints device name and current task on the first line with correct colors
 local function printDeviceStatus()
   for i = 1,#dev_windows do
@@ -45,8 +56,13 @@ function display.updateDisplay(worker_info)
   local event = os.pullEvent("timer")
 end
 
-function display.requestReload()
-
+function display.waitForButtons()
+  local event, key = os.pullEvent("key")
+  if key == keys.r then
+    return "reload"
+  elseif key == keys.q then
+    return "quit"
+  end
 end
 
 return display
