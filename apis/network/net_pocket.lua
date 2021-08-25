@@ -87,6 +87,9 @@ function netPocket.run()
       end
     else
       term.clear()
+      term.setCursorPos(1,1)
+      print("Goodbye.")
+      term.setCursorPos(1,2)
       break
     end
     if shouldKeepRunning == false then
