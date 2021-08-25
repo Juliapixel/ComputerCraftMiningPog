@@ -18,16 +18,17 @@ local function createHeader()
   local header
   header = windows.create(term.current(), 1, 1, w, 1)
   header.setBackgroundColor(colors.blue)
+  header.clear()
   header.setCursorPos(1, 1)
-  header.write("X")
-  header.setCursorPos(w - 5)
-  header.write("Reload")
-
+  header.write("(Q)uit")
+  header.setCursorPos(w - 7)
+  header.write("(R)eload")
 end
 
 -- prints device name and current task on the first line with correct colors
 local function printDeviceStatus()
   for i = 1,#dev_windows do
+    term.clear()
     local col = ""
     if devices[i]["present"] == true then
       col = colors.green
@@ -38,7 +39,7 @@ local function printDeviceStatus()
     if devices[i]["present"] ~= true then
       col = colors.red
     end
-
+    dev_windows[i].clear()
     dev_windows[i].setBackgroundColor(col)
     dev_windows[i].clearLine()
     dev_windows[i].write(devices[i]["name"])
@@ -51,18 +52,24 @@ end
 function display.updateDisplay(worker_info)
   os.startTimer(2)
   devices = worker_info
+  createHeader()
   initWindows()
   printDeviceStatus()
   local event = os.pullEvent("timer")
 end
 
 function display.waitForButtons()
-  local event, key = os.pullEvent("key")
-  if key == keys.r then
-    return "reload"
-  elseif key == keys.q then
-    return "quit"
-  end
+  local worked = false
+  repeat
+    local event, key = os.pullEvent("key")
+    if key == keys.r then
+      worked = true
+      return "reload"
+    elseif key == keys.q then
+      worked = true
+      return "quit"
+    end
+  until worked
 end
 
 return display
