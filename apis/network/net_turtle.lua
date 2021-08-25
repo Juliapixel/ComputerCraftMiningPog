@@ -29,7 +29,7 @@ local function isForbiddenName(name)
 end
 
 -- updates the worker_info table to send up to date info to receivers
--- available names: 
+-- available names: role, progress, curTask
 function netTurtle.updateInfo(name, value)
   if isForbiddenName then
     error("tried to change forbidden value in turtle info!", 2)
