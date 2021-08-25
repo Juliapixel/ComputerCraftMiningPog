@@ -68,6 +68,9 @@ function netPocket.run()
           end
           updateAll()
           parallel.waitForAny(wrapperUpdateDisplay, wrapperWaitForButtons)
+          if command ~= "" then 
+            break
+          end
         end
       elseif shouldKeepRunning == false then
         print("no devices found! keep searching? (y/n)")
