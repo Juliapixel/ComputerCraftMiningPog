@@ -1,4 +1,5 @@
 args = {...}
+local net = require("apis.network.net")
 local mine = require("apis.mine")
 local compare = require("apis.comparer.compare")
 local fuel = require("apis.fuel")
@@ -20,4 +21,3 @@ if pocket then
   net.run()
   rednet.close()
 end
-mine.tunnelAhead(arg[1])
