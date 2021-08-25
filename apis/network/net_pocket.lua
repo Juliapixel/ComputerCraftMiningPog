@@ -17,7 +17,7 @@ local function discover()
   local workerinfo = {}
   local i = 1
   while true do
-    senderID, workerinfo = rednet.receive("julia", 5)
+    senderID, workerinfo = rednet.receive("julia", 2)
     if workerinfo then
       worker_info[i] = workerinfo
       i = i + 1
