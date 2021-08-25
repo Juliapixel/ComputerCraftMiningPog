@@ -1,10 +1,19 @@
 args = {...}
+local net = require("apis.network.net")
 local mine = require("apis.mine")
 local compare = require("apis.comparer.compare")
 local fuel = require("apis.fuel")
 arg[1] = tonumber(arg[1])
-if type(arg[1]) ~= "number" then
-  error("not a number!")
-  return false
+if turtle then
+  if type(arg[1]) ~= "number" then
+    error("not a number!")
+    return false
+  end
+  local function wrapper()
+    mine.tunnelAhead(args[1])
+  end
+  parallel.waitForAny(net.run, wrapper)
 end
-mine.tunnelAhead(arg[1])
+if pocket then
+  net.run()
+end

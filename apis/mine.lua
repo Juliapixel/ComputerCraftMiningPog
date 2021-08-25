@@ -1,6 +1,9 @@
-mine = {}
+local netTurtle = require("apis.network.net_turtle")
 local compare = require("apis.comparer.compare")
 local fuel = require("apis.fuel")
+
+mine = {}
+
 local curDist = 1
 
 local function oreAhead()
@@ -68,8 +71,13 @@ end
 
 --makes turtle go forward and mine for ores around itself every time it does so.
 local function goForward()
-  turtle.dig()
-  turtle.forward()
+  local block_ahead = turtle.inspect()
+  repeat
+    turtle.dig()
+  until block_ahead == false
+  repeat 
+    local has_moved = turtle.forward()
+  until has_moved == true
   digOres()
   local isFull = compare.pruneInv()
   if isFull then
@@ -82,6 +90,7 @@ function mine.tunnelAhead(dist)
   dist = tonumber(dist)
   local full_dist = 2*dist
   fuel.refuel(full_dist)
+  netTurtle.updateInfo("curTask", "mining")
   for i=1, dist, 1 do
     goForward()
     curDist = curDist + 1
@@ -94,6 +103,7 @@ function mine.tunnelAhead(dist)
       turtle.dig()
     end
   end
+  netTurtle.updateInfo("curTask", "")
 end
 
 return mine

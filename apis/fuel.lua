@@ -1,3 +1,5 @@
+local netTurtle = require("apis.network.net_turtle")
+
 fuel = {}
 
 local totaldist = 1
@@ -22,6 +24,7 @@ local function waitForFuel()
       textutils.slowPrint("...", 1)
       break
     end
+    netTurtle.updateInfo("curTask", "needs fuel")
     term.clear()
     term.setCursorPos(1,1)
     --iterates through the table of available fuel sources and tells you how many of each of the available sources you will need to fill your tank up to an acceptable level
@@ -58,6 +61,7 @@ end
 
 local function selfRefuel()
   print("refuelling self.")
+  netTurtle.updateInfo("curTask", "refuelling")
   for i = 1, 16, 1 do
     local additional_fuel_needed = totaldist - turtle.getFuelLevel()
     --will end the refueling if enough fuel is already inserted.
@@ -67,7 +71,7 @@ local function selfRefuel()
       textutils.slowPrint("...", 1)
       break
     end
-      waitForFuel()
+    waitForFuel()
     local curItem = turtle.getItemDetail(i)
     --determines fuel ammount certain slot will provide. will be false if not in list.
     if curItem then
