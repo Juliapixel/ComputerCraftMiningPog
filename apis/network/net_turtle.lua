@@ -12,7 +12,7 @@ local master = 1
 
 --will wair for received commands and act upon them.
 --available commands are:  "amMaster", "sendInfo"
-function netTurtle.waitForCommand()
+local function waitForCommand()
   while true do
     local senderID, command = rednet.receive("julia")
     if command == "sendInfo" then
@@ -24,7 +24,7 @@ function netTurtle.waitForCommand()
 end
 
 local function isForbiddenName(name)
-  local forbiddenNames = {ID, name, present}
+  local forbiddenNames = {ID = 1, name = 1, present = 1}
   return forbiddenNames[name] ~= nil
 end
 

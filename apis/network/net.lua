@@ -10,7 +10,7 @@ function net.run()
     rednet.open("left")
     rednet.host("julia", os.getComputerLabel())
     local netTurtle = require("apis.network.net_turtle")
-    netTurtle.waitForCommand()
+    netTurtle.run()
   else
     local netDesktop = require("apis.network.net_desktop")
     netDesktop.run()
