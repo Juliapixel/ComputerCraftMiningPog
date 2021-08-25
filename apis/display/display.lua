@@ -27,8 +27,8 @@ end
 
 -- prints device name and current task on the first line with correct colors
 local function printDeviceStatus()
+  mainwindow.clear()
   for i = 1,#dev_windows do
-    term.clear()
     local col = ""
     if devices[i]["present"] == true then
       col = colors.green
