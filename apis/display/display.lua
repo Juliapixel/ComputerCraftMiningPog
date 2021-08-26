@@ -44,6 +44,9 @@ local function printDeviceStatus()
         needs_fuel = function()
           col = colors.orange
         end,
+        returning = function()
+          col = colors.blue
+        end,
         unknown = function()
           col = colors.black
         end

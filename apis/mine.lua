@@ -95,6 +95,7 @@ function mine.tunnelAhead(dist)
     goForward()
     curDist = curDist + 1
   end
+  netTurtle.updateInfo("curTask", "returning")
   turtle.turnLeft()
   turtle.turnLeft()
   for i=1, dist, 1 do
