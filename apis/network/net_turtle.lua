@@ -6,7 +6,7 @@ local worker_info = {
   role = "miner",
   progress = 0,
   present = true,
-  curTask = "idle"
+  curTask = "idle",
 }
 local master = 1
 
@@ -19,6 +19,10 @@ local function waitForCommand()
       rednet.send(senderID, worker_info, "julia")
     elseif command == "amMaster" then
       master = senderID
+    elseif command == "startMine" then
+      os.queueEvent("startMining", true)
+    elseif command == "cancelMine" then
+      os.queueEvent("startMining", true)
     end
   end
 end

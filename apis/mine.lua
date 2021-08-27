@@ -4,7 +4,6 @@ local fuel = require("apis.fuel")
 
 mine = {}
 
-local curDist = 1
 
 local function oreAhead()
   local has_block, data = turtle.inspect()
@@ -82,6 +81,62 @@ local function goForward()
   return isFull
 end
 
+local function mineCycle(length, cycles)
+
+  local full_dist = length * 2 * cycles + 6 * cycles + 1
+  local traversed = 1
+  local progress = traversed / full_dist
+
+  local function downLevel(direction, way)
+    turtle.digDown()
+    turtle.down()
+    turtle.digDown()
+    turtle.down()
+    if way == "in" then
+      turtle.turnLeft()
+      repeat turtle.dig() until turtle.forward() == true
+      traversed = traversed + 3
+      netTurtle.updateInfo("progress", progress)
+      turtle.turnLeft()
+    elseif way == "out" then
+      turtle.turnRight()
+      repeat turtle.dig() until turtle.forward() == true
+      traversed = traversed + 3
+      netTurtle.updateInfo("progress", progress)
+      turtle.turnRight()
+    end
+  end
+
+  for i = 1, cycles do
+    for j = 1, length do
+      goForward()
+      traversed = traversed + 1
+      netTurtle.updateInfo("progress", progress)
+    end
+    downLevel("in")
+    for j = 1, length do
+      goForward()
+      traversed = traversed + 1
+      netTurtle.updateInfo("progress", progress)
+    end
+    downLevel("out")
+  end
+end
+
+local function goBack(cycles)
+  turtle.turnLeft()
+  for i =  1, cycles do
+    repeat turtle.dig() until turtle.forward() == true
+    turtle.up()
+    turtle.up()
+    repeat turtle.dig() until turtle.forward() == true
+    turtle.up()
+    turtle.up()
+  end
+  turtle.turnRight()
+end
+
+
 function mine.tunnelAhead(dist)
   dist = tonumber(dist)
   local full_dist = 2*dist
@@ -89,7 +144,6 @@ function mine.tunnelAhead(dist)
   netTurtle.updateInfo("curTask", "mining")
   for i=1, dist, 1 do
     goForward()
-    curDist = curDist + 1
   end
   netTurtle.updateInfo("curTask", "returning")
   turtle.turnLeft()
@@ -101,6 +155,19 @@ function mine.tunnelAhead(dist)
     end
   end
   netTurtle.updateInfo("curTask", "")
+end
+
+function mine.smartTunnel(dist, times)
+  print("ready to receive start command!")
+  netTurtle.updateInfo("curTask", "ready")
+  local event, shouldStart = os.pullEvent("startMining")
+  if shouldStart then
+    netTurtle.updateInfo("curTask", "mining")
+    repeat turtle.dig() until turtle.forward() == true
+    mineCycle(dist, times)
+    netTurtle.updateInfo("curTask", "returning")
+    goBack(times)
+  end
 end
 
 return mine

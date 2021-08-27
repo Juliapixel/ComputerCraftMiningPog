@@ -3,15 +3,20 @@ local net = require("apis.network.net")
 local mine = require("apis.mine")
 local compare = require("apis.comparer.compare")
 local fuel = require("apis.fuel")
-local mine_dist = tonumber(args[1])
 -- tells the turtle to mine according to received arguments and runs its networking functions in parallel
 if turtle then
+  local mine_dist = tonumber(args[1])
   if type(mine_dist) ~= "number" then
-    error("not a number!")
+    error("depth not a number!")
+    return false
+  end
+  local cycles = tonumber(args[2])
+  if type(cycles) ~= "number" then
+    error("cycles not a number!")
     return false
   end
   local function wrapper()
-    mine.tunnelAhead(mine_dist)
+    mine.smartTunnel(mine_dist, cycles)
   end
   parallel.waitForAny(net.run, wrapper)
   rednet.close()
