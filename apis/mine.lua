@@ -129,8 +129,8 @@ local function goBack(cycles)
   turtle.turnLeft()
   for i =  1, cycles * 2 - 1 do
     repeat turtle.dig() until turtle.forward() == true
-    turtle.up()
-    turtle.up()
+    repeat turtle.digUp() until turtle.up() == true
+    repeat turtle.digUp() until turtle.up() == true
   end
   turtle.turnRight()
 end
