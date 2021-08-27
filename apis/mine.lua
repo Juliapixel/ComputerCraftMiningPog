@@ -87,6 +87,8 @@ local function mineCycle(length, cycles)
   local traversed = 1
   local progress = traversed / full_dist
 
+  fuel.refuel(full_dist)
+
   local function downLevel(way)
     turtle.digDown()
     turtle.down()
@@ -133,27 +135,6 @@ local function goBack(cycles)
     repeat turtle.digUp() until turtle.up() == true
   end
   turtle.turnRight()
-end
-
-
-function mine.tunnelAhead(dist)
-  dist = tonumber(dist)
-  local full_dist = 2*dist
-  fuel.refuel(full_dist)
-  netTurtle.updateInfo("curTask", "mining")
-  for i=1, dist, 1 do
-    goForward()
-  end
-  netTurtle.updateInfo("curTask", "returning")
-  turtle.turnLeft()
-  turtle.turnLeft()
-  for i=1, dist, 1 do
-    turtle.forward()
-    if turtle.inspect() then
-      turtle.dig()
-    end
-  end
-  netTurtle.updateInfo("curTask", "")
 end
 
 function mine.smartTunnel(dist, times)
