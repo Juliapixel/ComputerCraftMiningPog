@@ -87,8 +87,6 @@ local function mineCycle(length, cycles)
   local traversed = 1
   local progress = traversed / full_dist
 
-  fuel.refuel(full_dist)
-
   local function downLevel(way)
     turtle.digDown()
     turtle.down()
@@ -139,6 +137,8 @@ end
 
 function mine.smartTunnel(dist, times)
   print("ready to receive start command!")
+  local full_dist = dist * 2 * times + 6 * times + 1
+  fuel.refuel(full_dist)
   netTurtle.updateInfo("curTask", "ready")
   local event, shouldStart = os.pullEvent("startMining")
   if shouldStart then
