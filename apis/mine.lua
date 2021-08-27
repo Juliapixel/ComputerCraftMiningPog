@@ -71,13 +71,9 @@ end
 
 --makes turtle go forward and mine for ores around itself every time it does so.
 local function goForward()
-  local block_ahead = turtle.inspect()
   repeat
     turtle.dig()
-  until block_ahead == false
-  repeat 
-    local has_moved = turtle.forward()
-  until has_moved == true
+  until turtle.forward() == true
   digOres()
   local isFull = compare.pruneInv()
   if isFull then
