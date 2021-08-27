@@ -69,7 +69,7 @@ function netPocket.run()
             command = display.waitForButtons()
           end
           updateAll()
-          parallel.waitForAny(wrapperUpdateDisplay, wrapperWaitForButtons)
+          parallel.waitForAny(wrapperUpdateDisplay, wrapperWaitForButtons, display.sendCommands)
           if command ~= "" then 
             break
           end

@@ -95,4 +95,18 @@ function display.waitForButtons()
   until worked
 end
 
+function display.sendCommands()
+  local worked = false
+  repeat
+    local event, key = os.pullEvent("key")
+    if key == keys.s then
+      rednet.broadcast("startMine", "julia")
+      worked = true
+    elseif key == keys.c then
+      rednet.broadcast("cancelMine", "julia")
+      worked = true
+    end
+  until worked
+end
+
 return display
