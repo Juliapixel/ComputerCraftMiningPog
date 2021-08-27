@@ -87,7 +87,7 @@ local function mineCycle(length, cycles)
   local traversed = 1
   local progress = traversed / full_dist
 
-  local function downLevel(direction, way)
+  local function downLevel(way)
     turtle.digDown()
     turtle.down()
     turtle.digDown()
