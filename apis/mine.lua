@@ -119,16 +119,15 @@ local function mineCycle(length, cycles)
       traversed = traversed + 1
       netTurtle.updateInfo("progress", progress)
     end
-    downLevel("out")
+    if i ~= cycles then
+      downLevel("out")
+    end
   end
 end
 
 local function goBack(cycles)
   turtle.turnLeft()
-  for i =  1, cycles do
-    repeat turtle.dig() until turtle.forward() == true
-    turtle.up()
-    turtle.up()
+  for i =  1, cycles * 2 - 1 do
     repeat turtle.dig() until turtle.forward() == true
     turtle.up()
     turtle.up()
